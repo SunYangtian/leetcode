@@ -31,9 +31,9 @@ public:
             {
                 res.push_back(it->second);
                 res.push_back(i);
-                return res;
             }
         }
+        return res;
     }
 };
 
