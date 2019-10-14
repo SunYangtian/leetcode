@@ -12,10 +12,13 @@
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX_ARRAY_SIZE 32
+
 int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     *returnSize = 2;
     int *res = (int*)malloc(sizeof(int)*(*returnSize));
-
     for (int i = 0; i < numsSize; i++)
     {
         for (int j = i+1; j < numsSize; j++)
@@ -29,4 +32,42 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
         }
     }
     return NULL;
+}
+
+void print_res(int *res)
+{
+    printf("%d, %d\n", res[0],res[1]);
+    
+}
+
+int main(int argc, char const *argv[])
+{
+    int array[MAX_ARRAY_SIZE];
+    int length = 0;
+    int target;
+
+    // prepare the input
+    printf("input the aray\n");
+    // while (scanf("%d", &array[length]) != EOF)
+    // {
+    //     length += 1;
+    // }
+    char c = ' ';
+    while (c != '\n')
+    {
+        scanf("%d", &array[length]);
+        c = getchar();
+        length += 1;
+    }
+    
+    printf("the length is %d\n", length);
+
+    printf("input the target\n");
+    scanf("%d", &target);
+    
+    // start calculate
+    int *returnsize;
+    int *res = twoSum(array,length, target, returnsize);
+    if (res) print_res(res);
+    return 0;
 }
