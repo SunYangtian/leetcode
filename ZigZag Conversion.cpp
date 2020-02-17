@@ -6,7 +6,7 @@ A P L S I I G
 Y   I   R
 */
 
-// visit by row
+// visit(push back) by row
 class Solution {
 public:
     string convert(string s, int numRows) {
@@ -64,3 +64,27 @@ public:
 };
 
 // sort by row
+class Solution {
+public:
+    string convert(string s, int numRows) {
+    	if (s.length() < 1)
+    		return "";
+    	
+    	int listLen = numRows<s.length() ? numRows : s.length();
+    	vector<string> strRows(listLen);
+    	int currentRow = 0, goDown = 1;// 1 for down, 0 for up
+
+    	for (string::iterator it = s.begin(); it != s.end(); it++)
+    	{
+    		if (currentRow <= 0) {goDown = 1; currentRow = 0;}
+    		else if (currentRow >= numRows-1) {goDown = 0; currentRow = numRows-1;}
+    		strRows[currentRow].push_back(*it);
+    		if (goDown) currentRow += 1;
+    		else currentRow -= 1;
+    	}
+    	string ret = "";
+    	for (vector<string>::iterator it = strRows.begin(); it != strRows.end(); it++)
+    		ret += (*it);
+    	return ret;
+    }
+};
