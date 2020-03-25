@@ -37,14 +37,14 @@ public:
 	}
 
 	string add(string num1, string num2)
-	{
+	{   
 		int carry = 0, curret;
 		string ret;
 		int len1 = num1.length(), len2 = num2.length();
 		int i = len1-1, j = len2-1;
 		for (; i >= 0 && j >= 0; i--, j--)
 		{
-			curret = (num1[i] - '0') + (num2[i] - '0') + carry;
+			curret = (num1[i] - '0') + (num2[j] - '0') + carry;
 			carry = curret / 10;
 			curret = curret % 10;
 			ret.insert(ret.begin(), curret+'0');
@@ -72,14 +72,21 @@ public:
 
     string multiply(string num1, string num2)
     {
-		string ret = "0", curret;
+        string ret = "0", curret;
+		if (!num1.compare("0") || !num2.compare("0")) return ret;
 		for (int i = num2.length()-1; i >= 0; i--)
 		{
 			curret = partMul(num1, num2[i]-'0');
 			for (int j = 0; j < num2.length()-1-i; j++)
 				curret.push_back('0');
+            cout << curret << " ret: " << ret << endl;
 			ret = add(ret, curret);
 		}
+        
+        // delete 0
+        // while (ret[0] == '0')
+        //     ret.erase(ret.begin());
+            
 		return ret;
     }
 };
